@@ -248,27 +248,15 @@ class AngleRange:
 
         # вычитаемый промежуток отрезает кусок изнутри (разделяет текущий на две части)
         if other.start in self and other.end in self:
-            part1 = AngleRange(
-                self.start, other.start, self.include_start, not other.include_start
-            )
-            part2 = AngleRange(
-                other.end, self.end, not other.include_end, self.include_end
-            )
+            part1 = AngleRange(self.start, other.start, self.include_start, not other.include_start)
+            part2 = AngleRange(other.end, self.end, not other.include_end, self.include_end)
             return [part1, part2]
 
         # отрезается только один из краев промежутка
         if other.start in self:
-            return [
-                AngleRange(
-                    self.start, other.start, self.include_start, not other.include_start
-                )
-            ]
+            return [AngleRange(self.start, other.start, self.include_start, not other.include_start)]
         if other.end in self:
-            return [
-                AngleRange(
-                    other.end, self.end, not other.include_end, self.include_end
-                )
-            ]
+            return [AngleRange(other.end, self.end, not other.include_end, self.include_end)]
         return [self]
 
     # демонстрация
